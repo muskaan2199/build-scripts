@@ -1,0 +1,16 @@
+{
+    "package_name" : "mongodb",
+    "github_url":"https://github.com/mongodb/mongo.git",
+    "package_dir": "m/mongodb/Dockerfiles/",
+    "docker_cmd" :"docker build -t ${package_name}:$PACKAGE_VERSION ${dir}",
+
+    "r4.4.6" : {
+        "dir":"ubuntu_20.04"
+    },
+    "r4.4.12" : {
+        "dir":"ubuntu_focal"
+    },
+    "r*" : {
+        "dir":"template"
+    }
+}

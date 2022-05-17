@@ -1,0 +1,13 @@
+{
+    "package_name" : "erlang",
+    "github_url":"https://github.com/erlang/otp",
+    "package_dir": "e/erlang/",
+    "docker_cmd" :"docker build -t ${package_name}:$PACKAGE_VERSION ${dir}",
+
+    "OTP-24.3.4" : {
+        "dir":"template"
+    },
+    "OTP-*" : {
+        "dir":"template"
+    }
+}

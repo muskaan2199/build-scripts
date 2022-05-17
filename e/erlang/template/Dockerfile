@@ -1,11 +1,11 @@
 FROM registry.access.redhat.com/ubi8/ubi:latest
 
-ARG PACKAGE_VERSION="maint-24"
+ARG PACKAGE_VERSION="OTP-24.3.4"
 
 RUN yum install -y sudo git make unzip tar gcc-c++ gcc clang ncurses ncurses-devel sed java && \
 	git clone https://github.com/erlang/otp.git && \
 	cd otp && \
-	git checkout maint-24 && \
+	git checkout $PACKAGE_VERSION && \
 	./configure && \
 	make && \
 	make install && \
