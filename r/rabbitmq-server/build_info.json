@@ -1,0 +1,21 @@
+{
+    "package_name" : "rabbitmq-server",
+    "github_url":"https://github.com/rabbitmq/rabbitmq-server",
+    "package_dir": "r/rabbitmq-server/Dockerfiles/",
+    "docker_cmd" :"docker build -t ${package_name}:$PACKAGE_VERSION ${dir}",
+    "build_script" : "rabbitmq-server_ubi_8.5.sh",
+
+    "3.5.7" : {
+        "dir":"3.5.7_ubuntu_16.04"
+    },
+
+    "3.8.9" : {
+        "dir":"3.5.7_ubuntu_16.04",
+        "build_script":"rabbitmq-server_ubi_8.5.sh"
+    },
+
+    "*" : {
+        "dir":"3.5.7_ubuntu_16.04"
+    }
+}
+	

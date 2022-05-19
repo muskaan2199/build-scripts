@@ -1,19 +1,32 @@
 {
     "package_name" : "consul",
 	"github_url":"https://github.com/hashicorp/consul.git",
-    "package_dir": "c/consul/Dockerfile/",
+    "package_dir": "c/consul/Dockerfiles/",
     "docker_cmd" :"docker build -t ${package_name}:$PACKAGE_VERSION ${dir}",
+    "build_script" : "consul_ubi_8.5.sh",
     
-	"v1.4.4" : {
-        "dir":"template",
-		"build_script":"https://github.com/ppc64le/build-scripts/blob/master/c/consul/consul_rhel_7.6.sh"
-    },
     "v1.8.3" : {
         "dir":"1.8.3-ubi8"
     },
 	"v1.9.4" : {
         "dir":"1.9.4-ubi8"
     },
+
+    "v1.12.0" : {
+        "dir":"1.9.4-ubi8",
+        "build_script" : "consul_v1.12.0_ubi_8.5.sh"
+    },
+
+    "v1.1*.*": {
+        "dir": "1.9.4-ubi8",
+        "build_script" : "consul_v1.12.0_ubi_8.5.sh",
+        "args" : {
+            "GO_VERSION": "1.18.2",
+            "DUMB_INIT_VERSION": "1.2.5"
+        }
+        
+    },
+    
     "v*" : {
         "dir":"template"
     }

@@ -11,8 +11,8 @@
 
 FROM registry.access.redhat.com/ubi8/ubi:latest AS builder
 
-ARG PATCHFILE="7.11.2"
-ARG ELASTIC_VERSION=${1:-v7.11.2}
+ARG PATCH="https://github.com/muskaan2199/build-scripts/raw/Currency/e/elasticsearch/elasticsearch_8.1.1.patch"
+ARG PACKAGE_VERSION=${1:-v8.2.0}
 ARG MINIMUM_VERSION="v8.0.1"
 
 # `tini` is a tiny but valid init for containers. This is used to cleanly
@@ -45,16 +45,16 @@ RUN if [[ $ELASTIC_VERSION > $MINIMUM_VERSION ]]; then echo "$ELASTIC_VERSION>$M
 
 RUN git clone --single-branch --branch $ELASTIC_VERSION https://github.com/elastic/elasticsearch.git && \
     cd elasticsearch && git checkout $ELASTIC_VERSION && \
-    wget https://raw.githubusercontent.com/ppc64le/build-scripts/master/e/elasticsearch/elasticsearch_$PATCHFILE.patch && \
-    git apply elasticsearch_$PATCHFILE.patch && \
+    wget ${PATCHFILE} && \
+    git apply ${PATCHFILE##*/} && \
     ./gradlew :distribution:archives:linux-ppc64le-tar:assemble --parallel && \
-    mv ./distribution/archives/linux-ppc64le-tar/build/distributions/elasticsearch-$PATCHFILE-SNAPSHOT-linux-ppc64le.tar.gz /opt
+    mv ./distribution/archives/linux-ppc64le-tar/build/distributions/elasticsearch-*-SNAPSHOT--linux-ppc64le.tar.gz /opt
 
 RUN mkdir /usr/share/elasticsearch
 
 WORKDIR /usr/share/elasticsearch
 
-RUN tar -zxf /opt/elasticsearch-$PATCHFILE-SNAPSHOT-linux-ppc64le.tar.gz --strip-components=1
+RUN tar -zxf /opt/elasticsearch-*-SNAPSHOT-linux-ppc64le.tar.gz --strip-components=1
 
 RUN cd lib && \
     rm -rf jna-* && \

@@ -14,7 +14,8 @@ RUN groupadd zookeeper && useradd -r -g zookeeper zookeeper -m -d /home/zookeepe
 ENV ZOOKEEPER_VERSION 3.6.2
 
 #Download Zookeeper
-RUN yum install -y net-tools && wget -q http://mirror.vorboss.net/apache/zookeeper/zookeeper-${ZOOKEEPER_VERSION}/apache-zookeeper-${ZOOKEEPER_VERSION}-bin.tar.gz && \
+
+RUN echo $ZOOKEEPER_VERSION && yum install -y net-tools && wget -q http://mirror.vorboss.net/apache/zookeeper/zookeeper-${ZOOKEEPER_VERSION}/apache-zookeeper-${ZOOKEEPER_VERSION}-bin.tar.gz && \
 wget -q https://www.apache.org/dist/zookeeper/KEYS && \
 wget -q https://www.apache.org/dist/zookeeper/zookeeper-${ZOOKEEPER_VERSION}/apache-zookeeper-${ZOOKEEPER_VERSION}-bin.tar.gz.asc
 
