@@ -24,5 +24,6 @@ sudo yum install -y git tcl make gcc
 git clone https://github.com/antirez/redis.git
 cd redis
 git checkout 5.0.4
+make V=1 MALLOC=libc
 sudo make install
 redis-cli --version
