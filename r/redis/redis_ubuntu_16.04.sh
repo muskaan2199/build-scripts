@@ -24,6 +24,6 @@ sudo apt-get install -y git build-essential tcl
 git clone https://github.com/antirez/redis.git
 cd redis
 make distclean
-make V=1
+make V=1 MALLOC=lib
 make test
 sudo make install
