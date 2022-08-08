@@ -16,7 +16,7 @@
 # ----------------------------------------------------------------------------
 
 PACKAGE_NAME=github.com/gogo/protobuf
-PACKAGE_VERSION=${1:-v1.3.2}
+PACKAGE_VERSION=${1:-v1.3.1}
 PACKAGE_URL=https://github.com/gogo/protobuf
 
 yum install -y git golang make wget unzip sudo
@@ -27,11 +27,9 @@ unzip protoc-3.9.1-linux-ppcle_64.zip
 cp -r include/* /usr/local/include
 cp bin/protoc /usr/local/bin
 
-go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
-
 OS_NAME=$(cat /etc/os-release | grep ^PRETTY_NAME | cut -d= -f2)
 
-export GO111MODULE=ON
+export GO111MODULE=auto
 export PATH=$PATH:~/go/bin
 export GOPATH=$HOME/go
 
@@ -46,7 +44,8 @@ fi
 
 cd $GOPATH/src/$PACKAGE_NAME
 git checkout $PACKAGE_VERSION
-if ! sudo make clean install regenerate; then
+sed -i '321d' proto/text_parser.go && sed -i "321i\       return string(rune(i)), s, nil" proto/text_parser.go
+if ! sudo -E make clean install regenerate; then
 	echo "------------------$PACKAGE_NAME:install_fails---------------------"
 	echo "$PACKAGE_VERSION $PACKAGE_NAME"
 	echo "$PACKAGE_NAME  | $PACKAGE_VERSION | $OS_NAME | GitHub | Fail |  Install_Fails"
@@ -54,7 +53,7 @@ if ! sudo make clean install regenerate; then
 fi
 
 cd $GOPATH/src/$PACKAGE_NAME
-if ! sudo make tests errcheck; then
+if ! sudo -E tests errcheck; then
 	echo "------------------$PACKAGE_NAME:test_fails---------------------"
 	echo "$PACKAGE_VERSION $PACKAGE_NAME"
 	echo "$PACKAGE_NAME  | $PACKAGE_VERSION | $OS_NAME | GitHub | Fail |  Test_Fails"
