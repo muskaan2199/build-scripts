@@ -44,6 +44,7 @@ fi
 
 cd $GOPATH/src/$PACKAGE_NAME
 git checkout $PACKAGE_VERSION
+export PATH=$(go env GOPATH)/bin:$PATH
 if ! make clean install regenerate; then
 	echo "------------------$PACKAGE_NAME:install_fails---------------------"
 	echo "$PACKAGE_VERSION $PACKAGE_NAME"
