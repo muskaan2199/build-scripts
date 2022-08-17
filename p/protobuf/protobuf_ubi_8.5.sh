@@ -33,6 +33,9 @@ export GO111MODULE=auto
 export PATH=$PATH:~/go/bin
 export GOPATH=$HOME/go
 
+go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.28
+go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.2
+
 mkdir -p ~/go/src
 cd $GOPATH/src
 if ! git clone $PACKAGE_URL $PACKAGE_NAME; then
