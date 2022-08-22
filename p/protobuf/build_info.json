@@ -3,7 +3,7 @@
     "package_dir": "p/protobuf/Dockerfiles/",
     "docker_cmd" :"docker build -t ${package_name}:$PACKAGE_VERSION ${dir}",
 
-    "v3.21.3" : {
+    "v3.21.2" : {
 		"build_script":"protobuf_ubi_8.5_v21.5.sh"
     },
     
