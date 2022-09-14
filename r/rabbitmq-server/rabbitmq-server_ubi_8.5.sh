@@ -36,9 +36,9 @@ localedef -c -f UTF-8 -i en_US en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export ERL_TOP=$PWD
 export PATH=$PATH:$ERL_TOP/bin
-https://github.com/rabbitmq/rabbitmq-server/commit/d94b4208a5b61ef658d901ad4de76337b67d6e0b
+#https://github.com/rabbitmq/rabbitmq-server/commit/d94b4208a5b61ef658d901ad4de76337b67d6e0b
 export ERL_LIBS=''
-expo rt MAKEFLAGS=-j4
+export MAKEFLAGS=-j4
 find "$PWD" -name "config.guess" -exec sh -c 'cp /usr/share/automake*/config.guess $1' _ {} \;
 ./scripts/build-otp
 #./otp_build tests && echo "sucessfully tests passed otp"

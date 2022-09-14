@@ -1,0 +1,25 @@
+{
+    "package_name" : "rabbitmq-server",
+    "package_dir": "r/rabbitmq-server/Dockerfiles/",
+    "docker_cmd" :"docker build -t ${package_name}:$PACKAGE_VERSION ${dir}",
+
+    "v3.8.9" : {
+		"build_script":"rabbitmq-server_ubi_8.5.sh"
+    },
+
+    "v21.*" : {
+      "build_script":"protobuf_ubi_8.5_v21.5.sh"
+    },
+
+    "v3.21.*" : {
+       "build_script":"protobuf_ubi_8.5_v21.5.sh"
+    },
+
+    "v3.*.*" : {
+      "build_script":"protobuf_ubi_8.5_v21.5.sh"
+      },
+
+    "*.*.*" : {
+      "build_script":"protobuf_ubi_8.5.sh"
+    }
+}
